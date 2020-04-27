@@ -3,53 +3,54 @@ package com.myapps.dogsrecycler
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
-import android.support.v7.widget.GridLayoutManager
-import android.util.Log
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.myapps.dogsrecycler.common.InfiniteScrollListener
 import com.myapps.dogsrecycler.common.inflate
-import kotlinx.android.synthetic.main.fragment_dogs.*
+import kotlinx.android.synthetic.main.fragment_animals.*
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import rx.subscriptions.CompositeSubscription
 
-class DogsFragment : Fragment() {
+class AnimalFragment : Fragment() {
 
-    private val dogsList by lazy { dogs_list }
-    private val dogsManager by lazy { DogsManager() }
+    var animal: String = ""
+    private val animalsAdapter by lazy { AnimalAdapter() }
+    private val animalsManager by lazy { AnimalManager(animal) }
     private var subscriptions = CompositeSubscription()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return container?.inflate(R.layout.fragment_dogs)
+        return container?.inflate(R.layout.fragment_animals)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        dogsList.setHasFixedSize(true)
-        val gridLayout = GridLayoutManager(activity, 2)
-        dogsList.layoutManager = gridLayout
-        dogsList.clearOnScrollListeners()
-        dogsList.addOnScrollListener( InfiniteScrollListener( {requestDogs()}, gridLayout))
-
-        initAdapter()
+        val linearLayout = LinearLayoutManager(activity)
+        animalsList.apply {
+            adapter = animalsAdapter
+            setHasFixedSize(true)
+            layoutManager = linearLayout
+            clearOnScrollListeners()
+            addOnScrollListener( InfiniteScrollListener( {requestAnimals()}, linearLayout))
+        }
 
         if (savedInstanceState != null){
             val imagesURL = savedInstanceState.getStringArrayList("imagesURL") as ArrayList
-            (dogsList.adapter as DogsAdapter).addDogs(imagesURL)
+            animalsAdapter.addAnimals(imagesURL)
         } else {
-            requestDogs()
+            requestAnimals()
         }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putStringArrayList("imagesURL", (dogsList.adapter as DogsAdapter).imagesURL)
+        outState.putStringArrayList("imagesURL", animalsAdapter.imagesURL)
     }
 
     override fun onResume() {
@@ -62,23 +63,16 @@ class DogsFragment : Fragment() {
         subscriptions.clear()
     }
 
-    private fun initAdapter() {
-        if (dogsList.adapter == null){
-            dogsList.adapter = DogsAdapter()
-        }
-    }
-
-    private fun requestDogs() {
-        val subscription = dogsManager.getDogs()
+    private fun requestAnimals() {
+        val subscription = animalsManager.getDogs()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { retrievedDogs ->
-                    (dogsList.adapter as DogsAdapter).addDogs(retrievedDogs)
-                    (dogsList.adapter as DogsAdapter).notifyDataSetChanged()
+                { retrievedAnimals ->
+                   animalsAdapter.addAnimals(retrievedAnimals)
                 },
                 {   e ->
-                    Snackbar.make(dogsList, e.message ?: "", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(animalsList, e.message ?: "", Snackbar.LENGTH_LONG).show()
                 })
         subscriptions.add(subscription)
     }

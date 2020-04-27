@@ -5,8 +5,11 @@
     <string name="sign_in">Sign in</string>
 
     <string name="login_error">Invalid login</string>
-    <string name="password_error">Password must be >8 characters</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="password_error_length">Password must be >8 characters</string>
+    <string name="password_error_capital_letter">Password must contain a capital letter</string>
+    <string name="password_error_numeric">Password must contain a number </string>
+    
+    <string name="dogs_tab">Dogs</string>
+    <string name="cats_tabs">Cats</string>
+    <string name="birds_tabs">Birds</string>
 </resources>

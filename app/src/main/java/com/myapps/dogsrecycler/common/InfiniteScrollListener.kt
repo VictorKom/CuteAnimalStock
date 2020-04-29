@@ -10,7 +10,7 @@ class InfiniteScrollListener(
 
     private var previousTotal = 0
     private var loading = true
-    private var visibleThreshold = 4
+    private var visibleThreshold = 2
     private var firstVisibleItem = 0
     private var visibleItemCount = 0
     private var totalItemCount = 0

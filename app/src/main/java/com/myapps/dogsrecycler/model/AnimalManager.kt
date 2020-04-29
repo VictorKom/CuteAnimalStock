@@ -1,4 +1,4 @@
-package com.myapps.dogsrecycler
+package com.myapps.dogsrecycler.model
 
 import com.myapps.dogsrecycler.common.App
 import rx.Observable
@@ -10,7 +10,7 @@ class AnimalManager(private val animal: String) {
             subscriber ->
 
                 val api = App.getAnimalsAPI()
-                val response = api.getDogs(animal,10).execute()
+                val response = api.getDogs(animal,5).execute()
                 if (response.isSuccessful) {
                     subscriber.onNext(response.body())
                     subscriber.onCompleted()

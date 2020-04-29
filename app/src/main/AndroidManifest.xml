@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name=".common.App">
-        <activity android:name=".LoginActivity">
+        <activity android:name=".ui.activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,10 +19,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:parentActivityName=".LoginActivity">
-
-
+            android:name=".ui.activities.MainActivity"
+            android:parentActivityName=".ui.activities.LoginActivity">
         </activity>
     </application>
 

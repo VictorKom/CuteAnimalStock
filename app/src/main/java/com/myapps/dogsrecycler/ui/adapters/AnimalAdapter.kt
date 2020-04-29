@@ -1,10 +1,11 @@
-package com.myapps.dogsrecycler
+package com.myapps.dogsrecycler.ui.adapters
 
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import com.myapps.dogsrecycler.R
 import com.squareup.picasso.Picasso
 
 class AnimalAdapter : RecyclerView.Adapter<AnimalAdapter.ViewHolder>() {

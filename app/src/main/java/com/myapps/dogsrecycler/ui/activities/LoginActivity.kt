@@ -1,4 +1,4 @@
-package com.myapps.dogsrecycler
+package com.myapps.dogsrecycler.ui.activities
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -7,22 +7,34 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.Toast
+import com.arellomobile.mvp.MvpAppCompatActivity
+import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.myapps.dogsrecycler.R
+import com.myapps.dogsrecycler.presenter.LoginPresenter
+import com.myapps.dogsrecycler.view.LoginView
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : AppCompatActivity() {
-    private var loginIsValid = false
-    private var passwordIsValid = false
+class LoginActivity : MvpAppCompatActivity(), LoginView {
+
+    @InjectPresenter
+    lateinit var loginPresenter: LoginPresenter
+
+    private var loginIsValid = true
+    private var passwordIsValid = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         addTextChangeListener(login)
         addTextChangeListener(password)
-        signIn.setOnClickListener {
-            Toast.makeText(this, "Welcome", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
+        signIn.setOnClickListener { loginPresenter.signIn() }
+    }
+
+    override fun successLogIn() {
+        Toast.makeText(this, R.string.welcome, Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
     private fun addTextChangeListener(editText: EditText) {

@@ -1,10 +1,12 @@
-package com.myapps.dogsrecycler
+package com.myapps.dogsrecycler.ui.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import com.myapps.dogsrecycler.R
+import com.myapps.dogsrecycler.ui.fragments.AnimalFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -21,7 +23,8 @@ class MainActivity : AppCompatActivity() {
 
     private inner class SectionsPagerAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
         override fun getItem(position: Int): Fragment {
-            val animalFragment = AnimalFragment()
+            val animalFragment =
+                AnimalFragment()
             animalFragment.animal =  when(position){
                 0 -> "shibes"
                 1 -> "cats"

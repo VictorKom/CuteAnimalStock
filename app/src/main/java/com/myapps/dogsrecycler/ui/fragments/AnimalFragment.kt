@@ -2,28 +2,21 @@ package com.myapps.dogsrecycler.ui.fragments
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
-import com.arellomobile.mvp.MvpFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.myapps.dogsrecycler.R
 import com.myapps.dogsrecycler.common.InfiniteScrollListener
 import com.myapps.dogsrecycler.common.inflate
-import com.myapps.dogsrecycler.model.AnimalManager
-import com.myapps.dogsrecycler.presenter.AnimalPresenter
 import com.myapps.dogsrecycler.ui.adapters.AnimalAdapter
-import com.myapps.dogsrecycler.view.AnimalView
 import kotlinx.android.synthetic.main.fragment_animals.*
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
-import rx.subscriptions.CompositeSubscription
 
 
-class AnimalFragment : MvpAppCompatFragment(), AnimalView {
+class AnimalFragment : MvpAppCompatFragment(),
+    AnimalView {
 
     @InjectPresenter
     lateinit var animalPresenter: AnimalPresenter
@@ -50,7 +43,10 @@ class AnimalFragment : MvpAppCompatFragment(), AnimalView {
             addOnScrollListener(InfiniteScrollListener({ requestAnimals() }, linearLayout))
         }
         animalPresenter.animal = animal
-        requestAnimals()
+
+        if (savedInstanceState == null) {
+            requestAnimals()
+        }
     }
 
     override fun addAnimals(animals: ArrayList<String>) {
@@ -60,7 +56,6 @@ class AnimalFragment : MvpAppCompatFragment(), AnimalView {
     override fun showErrorMassage(message: String?) {
         Snackbar.make(animalsList, message ?: "", Snackbar.LENGTH_LONG).show()
     }
-
 
     private fun requestAnimals() {
         animalPresenter.requestAnimals()

@@ -1,11 +1,8 @@
-package com.myapps.dogsrecycler.presenter
+package com.myapps.dogsrecycler.ui.fragments
 
-import android.support.design.widget.Snackbar
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.myapps.dogsrecycler.model.AnimalManager
-import com.myapps.dogsrecycler.view.AnimalView
-import kotlinx.android.synthetic.main.fragment_animals.*
+import com.myapps.dogsrecycler.App
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import rx.subscriptions.CompositeSubscription
@@ -15,10 +12,9 @@ class AnimalPresenter : MvpPresenter<AnimalView>() {
 
     var animal: String = ""
     private var subscriptions = CompositeSubscription()
-    private val animalsManager by lazy { AnimalManager(animal) }
 
     fun requestAnimals() {
-        val subscription = animalsManager.getDogs()
+        val subscription = App.INSTANCE.animalAPI.getDogs(animal, 5)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(

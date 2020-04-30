@@ -1,7 +1,6 @@
-package com.myapps.dogsrecycler.ui.activities
+package com.myapps.dogsrecycler.ui.activities.login
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,13 +8,12 @@ import android.widget.EditText
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.myapps.dogsrecycler.R
-import com.myapps.dogsrecycler.presenter.LoginPresenter
-import com.myapps.dogsrecycler.view.LoginView
+import com.myapps.dogsrecycler.ui.activities.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : MvpAppCompatActivity(), LoginView {
+class LoginActivity : MvpAppCompatActivity(),
+    LoginView {
 
     @InjectPresenter
     lateinit var loginPresenter: LoginPresenter

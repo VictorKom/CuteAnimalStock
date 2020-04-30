@@ -1,4 +1,4 @@
-package com.myapps.dogsrecycler.view
+package com.myapps.dogsrecycler.ui.fragments
 
 import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.viewstate.strategy.AddToEndStrategy

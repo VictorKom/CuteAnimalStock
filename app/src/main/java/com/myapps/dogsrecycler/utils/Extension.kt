@@ -1,4 +1,4 @@
-package com.myapps.dogsrecycler.common
+package com.myapps.dogsrecycler.utils
 
 import android.view.LayoutInflater
 import android.view.View

@@ -1,4 +1,4 @@
-package com.myapps.dogsrecycler.common
+package com.myapps.dogsrecycler.ui.common
 
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager

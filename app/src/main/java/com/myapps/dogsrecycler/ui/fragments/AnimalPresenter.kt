@@ -1,8 +1,8 @@
 package com.myapps.dogsrecycler.ui.fragments
 
-import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.myapps.dogsrecycler.App
+import moxy.InjectViewState
+import moxy.MvpPresenter
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import rx.subscriptions.CompositeSubscription

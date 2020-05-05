@@ -1,40 +1,36 @@
 package com.myapps.dogsrecycler.ui.adapters
 
-import android.support.v7.widget.CardView
-import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.myapps.dogsrecycler.R
-import com.squareup.picasso.Picasso
+import com.myapps.dogsrecycler.utils.inflate
 
-class AnimalAdapter : RecyclerView.Adapter<AnimalAdapter.ViewHolder>() {
+class AnimalAdapter : ListAdapter<String, AnimalAdapter.ViewHolder>(ImageItemDiffCallback()) {
 
-    var imagesURL = ArrayList<String>()
+    private val imageList = ArrayList<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val cardView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.animals_item, parent,false) as CardView
-        return ViewHolder(cardView)
-    }
-
-    override fun getItemCount(): Int {
-        return imagesURL.size
+        return ViewHolder(parent.inflate(R.layout.animals_item))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.onBind(position)
+        holder.onBind(getItem(position))
     }
 
     fun addAnimals(animals: ArrayList<String>) {
-        imagesURL.addAll(animals)
-        notifyDataSetChanged()
+        imageList.addAll(animals)
+        submitList(imageList)
     }
 
-    inner class ViewHolder(private val cardView: CardView) : RecyclerView.ViewHolder(cardView) {
-        fun onBind(position: Int) {
+    inner class ViewHolder(private val cardView: View) : RecyclerView.ViewHolder(cardView) {
+
+        fun onBind(imageURL: String) {
             val image = this.cardView.findViewById<ImageView>(R.id.animal_image)
-            Picasso.get().load(imagesURL[position]).fit().centerCrop().into(image)
+            Glide.with(cardView).load(imageURL).centerCrop().into(image)
         }
     }
 

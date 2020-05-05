@@ -1,10 +1,10 @@
 package com.myapps.dogsrecycler.ui.activities
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import com.myapps.dogsrecycler.R
 import com.myapps.dogsrecycler.ui.fragments.AnimalFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -21,7 +21,8 @@ class MainActivity : AppCompatActivity() {
         tabs.setupWithViewPager(pager)
     }
 
-    private inner class SectionsPagerAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
+    private inner class SectionsPagerAdapter(fm: FragmentManager)
+        : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
         override fun getItem(position: Int): Fragment {
             val animalFragment =
                 AnimalFragment()

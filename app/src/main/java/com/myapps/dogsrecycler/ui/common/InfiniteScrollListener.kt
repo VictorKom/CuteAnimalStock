@@ -1,12 +1,13 @@
 package com.myapps.dogsrecycler.ui.common
 
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+
 
 class InfiniteScrollListener(
     val func: () -> Unit,
-    private val layoutManager: LinearLayoutManager) : RecyclerView.OnScrollListener() {
+    private val layoutManager: LinearLayoutManager
+) : RecyclerView.OnScrollListener() {
 
     private var previousTotal = 0
     private var loading = true

@@ -1,10 +1,11 @@
 package com.myapps.dogsrecycler.ui.activities.login
 
-import com.arellomobile.mvp.MvpView
-import com.arellomobile.mvp.viewstate.strategy.SkipStrategy
-import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
+import moxy.MvpView
+import moxy.viewstate.strategy.SkipStrategy
+import moxy.viewstate.strategy.StateStrategyType
+
 
 @StateStrategyType(SkipStrategy::class)
-interface LoginView : MvpView{
+interface LoginView : MvpView {
     fun successLogIn()
 }

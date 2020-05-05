@@ -4,7 +4,6 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import rx.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
 class RetrofitService {

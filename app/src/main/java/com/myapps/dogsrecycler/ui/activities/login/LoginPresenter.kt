@@ -1,7 +1,8 @@
 package com.myapps.dogsrecycler.ui.activities.login
 
-import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
+import moxy.InjectViewState
+import moxy.MvpPresenter
+
 
 @InjectViewState
 class LoginPresenter : MvpPresenter<LoginView>() {

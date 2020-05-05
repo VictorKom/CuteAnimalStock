@@ -1,18 +1,18 @@
 package com.myapps.dogsrecycler.ui.fragments
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.arellomobile.mvp.MvpAppCompatFragment
-import com.arellomobile.mvp.presenter.InjectPresenter
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.myapps.dogsrecycler.R
 import com.myapps.dogsrecycler.ui.common.InfiniteScrollListener
 import com.myapps.dogsrecycler.utils.inflate
 import com.myapps.dogsrecycler.ui.adapters.AnimalAdapter
 import kotlinx.android.synthetic.main.fragment_animals.*
+import moxy.MvpAppCompatFragment
+import moxy.presenter.InjectPresenter
 
 
 class AnimalFragment : MvpAppCompatFragment(),

@@ -6,11 +6,11 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.Toast
-import com.arellomobile.mvp.MvpAppCompatActivity
-import com.arellomobile.mvp.presenter.InjectPresenter
 import com.myapps.dogsrecycler.R
 import com.myapps.dogsrecycler.ui.activities.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
+import moxy.MvpAppCompatActivity
+import moxy.presenter.InjectPresenter
 
 class LoginActivity : MvpAppCompatActivity(),
     LoginView {
@@ -71,8 +71,7 @@ class LoginActivity : MvpAppCompatActivity(),
                 if (hasCapitalLetter) {
                     if (hasNumeric) {
                         passwordIsValid = true
-                    }
-                    else{
+                    } else {
                         password.error = resources.getString(R.string.password_error_numeric)
                         passwordIsValid = false
                     }

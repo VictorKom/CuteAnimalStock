@@ -1,9 +1,10 @@
 package com.myapps.dogsrecycler.ui.fragments
 
-import com.arellomobile.mvp.MvpView
-import com.arellomobile.mvp.viewstate.strategy.AddToEndStrategy
-import com.arellomobile.mvp.viewstate.strategy.SkipStrategy
-import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
+import moxy.MvpView
+import moxy.viewstate.strategy.AddToEndStrategy
+import moxy.viewstate.strategy.SkipStrategy
+import moxy.viewstate.strategy.StateStrategyType
+
 
 @StateStrategyType(AddToEndStrategy::class)
 interface AnimalView : MvpView {

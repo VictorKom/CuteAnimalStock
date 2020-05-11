@@ -3,6 +3,7 @@ package com.myapps.dogsrecycler
 import android.app.Application
 import com.myapps.dogsrecycler.network.AnimalAPI
 import com.myapps.dogsrecycler.network.RetrofitService
+import retrofit2.Retrofit
 
 class App : Application() {
 
@@ -11,12 +12,12 @@ class App : Application() {
         private set
     }
 
-    lateinit var animalAPI: AnimalAPI
+    lateinit var retrofit: Retrofit
 
     override fun onCreate() {
         super.onCreate()
         INSTANCE = this
-        animalAPI = RetrofitService.getInstance()
+        retrofit = RetrofitService.getInstance()
     }
 
 }

@@ -24,15 +24,12 @@ class MainActivity : AppCompatActivity() {
     private inner class SectionsPagerAdapter(fm: FragmentManager)
         : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
         override fun getItem(position: Int): Fragment {
-            val animalFragment =
-                AnimalFragment()
-            animalFragment.animal =  when(position){
-                0 -> "shibes"
-                1 -> "cats"
-                2 -> "birds"
-                else -> ""
+            return when(position) {
+                0 -> AnimalFragment.newInstance("shibes")
+                1 -> AnimalFragment.newInstance("cats")
+                2 -> AnimalFragment.newInstance("birds")
+                else -> Fragment()
             }
-            return animalFragment
         }
 
         override fun getCount(): Int {

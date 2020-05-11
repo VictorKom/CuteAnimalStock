@@ -5,7 +5,6 @@ import moxy.viewstate.strategy.AddToEndStrategy
 import moxy.viewstate.strategy.SkipStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
-
 @StateStrategyType(AddToEndStrategy::class)
 interface AnimalView : MvpView {
 
@@ -13,6 +12,5 @@ interface AnimalView : MvpView {
 
     @StateStrategyType(SkipStrategy::class)
     fun showErrorMassage(message: String?)
-
 
 }

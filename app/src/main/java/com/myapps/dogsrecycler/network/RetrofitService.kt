@@ -10,14 +10,9 @@ import java.util.concurrent.TimeUnit
 class RetrofitService {
 
     companion object {
-        var animalAPI: AnimalAPI? = null
         private const val BASE_URL = "http://shibe.online/"
 
-        fun getInstance(): AnimalAPI {
-            if (animalAPI != null) {
-                return animalAPI!!
-            }
-
+        fun getInstance(): Retrofit {
             val loggingInterceptor = HttpLoggingInterceptor()
             loggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC
 
@@ -28,14 +23,12 @@ class RetrofitService {
                 .addInterceptor(loggingInterceptor)
                 .build()
 
-            val retrofit = Retrofit.Builder()
+            return Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
                 .build()
-            animalAPI = retrofit.create(AnimalAPI::class.java)
-            return animalAPI!!
         }
     }
 }

@@ -7,22 +7,26 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.myapps.dogsrecycler.R
-import com.myapps.dogsrecycler.ui.common.InfiniteScrollListener
+import com.myapps.dogsrecycler.utils.InfiniteScrollListener
 import com.myapps.dogsrecycler.utils.inflate
 import com.myapps.dogsrecycler.ui.adapters.AnimalAdapter
 import kotlinx.android.synthetic.main.fragment_animals.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 
-
-class AnimalFragment : MvpAppCompatFragment(),
-    AnimalView {
+class AnimalFragment : MvpAppCompatFragment(), AnimalView {
 
     @InjectPresenter
     lateinit var animalPresenter: AnimalPresenter
-
-    var animal: String = ""
     private val animalsAdapter by lazy { AnimalAdapter() }
+    companion object {
+        fun newInstance(animal: String) =
+            AnimalFragment().apply {
+                arguments = Bundle().apply {
+                    putString("animal", animal)
+                }
+            }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,7 +51,6 @@ class AnimalFragment : MvpAppCompatFragment(),
                 )
             )
         }
-        animalPresenter.animal = animal
 
         if (savedInstanceState == null) {
             requestAnimals()
@@ -63,6 +66,6 @@ class AnimalFragment : MvpAppCompatFragment(),
     }
 
     private fun requestAnimals() {
-        animalPresenter.requestAnimals()
+        arguments?.getString("animal")?.let { animalPresenter.requestAnimals(it) }
     }
 }

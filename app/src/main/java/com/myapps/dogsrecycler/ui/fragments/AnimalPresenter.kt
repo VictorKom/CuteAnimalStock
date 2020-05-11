@@ -1,23 +1,17 @@
 package com.myapps.dogsrecycler.ui.fragments
 
-import com.myapps.dogsrecycler.App
-import io.reactivex.android.schedulers.AndroidSchedulers
+import com.myapps.dogsrecycler.data.RemoteRepository
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import moxy.InjectViewState
 import moxy.MvpPresenter
 
-
 @InjectViewState
 class AnimalPresenter : MvpPresenter<AnimalView>() {
+    private val remoteRepository = RemoteRepository.getInstance()
+    private var disposables = CompositeDisposable()
 
-    var animal: String = ""
-    private var subscriptions = CompositeDisposable()
-
-    fun requestAnimals() {
-        val subscription = App.INSTANCE.animalAPI.getAnimals(animal, 5)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+    fun requestAnimals(animal: String) {
+        val disposable = remoteRepository.getAnimals(animal)
             .subscribe(
                 { retrievedAnimals ->
                     viewState.addAnimals(retrievedAnimals)
@@ -25,11 +19,11 @@ class AnimalPresenter : MvpPresenter<AnimalView>() {
                 { e ->
                     viewState.showErrorMassage(e.message)
                 })
-        subscriptions.add(subscription)
+        disposables.add(disposable)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        subscriptions.clear()
+        disposables.clear()
     }
 }

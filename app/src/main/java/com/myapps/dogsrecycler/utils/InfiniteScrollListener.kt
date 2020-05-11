@@ -1,4 +1,4 @@
-package com.myapps.dogsrecycler.ui.common
+package com.myapps.dogsrecycler.utils
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView

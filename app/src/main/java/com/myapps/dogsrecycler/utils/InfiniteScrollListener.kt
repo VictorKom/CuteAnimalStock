@@ -1,12 +1,13 @@
-package com.myapps.dogsrecycler.common
+package com.myapps.dogsrecycler.utils
 
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+
 
 class InfiniteScrollListener(
     val func: () -> Unit,
-    private val layoutManager: GridLayoutManager) : RecyclerView.OnScrollListener() {
+    private val layoutManager: LinearLayoutManager
+) : RecyclerView.OnScrollListener() {
 
     private var previousTotal = 0
     private var loading = true
@@ -19,22 +20,20 @@ class InfiniteScrollListener(
         super.onScrolled(recyclerView, dx, dy)
 
         if (dy > 0) {
-            visibleItemCount = recyclerView.childCount;
-            totalItemCount = layoutManager.itemCount;
-            firstVisibleItem = layoutManager.findFirstVisibleItemPosition();
+            visibleItemCount = recyclerView.childCount
+            totalItemCount = layoutManager.itemCount
+            firstVisibleItem = layoutManager.findFirstVisibleItemPosition()
 
             if (loading) {
                 if (totalItemCount > previousTotal) {
-                    loading = false;
-                    previousTotal = totalItemCount;
+                    loading = false
+                    previousTotal = totalItemCount
                 }
             }
             if (!loading && (totalItemCount - visibleItemCount)
                 <= (firstVisibleItem + visibleThreshold)) {
-                // End has been reached
-                Log.v("myTag", "End reached");
                 func()
-                loading = true;
+                loading = true
             }
         }
     }
